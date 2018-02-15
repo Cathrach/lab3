@@ -1,0 +1,47 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+add_to_family	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let add_to_family (f1 : family) (f2 : family) : family =$/;"	v	language:OCaml
+birthdate	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type person = {name : string; favorite : color; birthdate : date};;$/;"	r	language:OCaml	type:person
+blend	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let blend (c1 : color) (c2 : color) : color =$/;"	v	language:OCaml
+blend_channel	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let blend_channel (a : int) (b : int) : int =$/;"	v	language:OCaml
+Blue	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type color_label = Red | Crimson | Orange | Yellow | Green | Blue | Indigo |$/;"	C	language:OCaml	type:color_label
+color	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type color =$/;"	t	language:OCaml
+color_label	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type color_label = Red | Crimson | Orange | Yellow | Green | Blue | Indigo |$/;"	t	language:OCaml
+contains_first	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let contains_first (n : string) (f : family) : bool =$/;"	v	language:OCaml
+convert_to_rgb	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let convert_to_rgb (c : color) : int * int * int =$/;"	v	language:OCaml
+count_people	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let count_people (f : family) : int =$/;"	v	language:OCaml
+Crimson	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type color_label = Red | Crimson | Orange | Yellow | Green | Blue | Indigo |$/;"	C	language:OCaml	type:color_label
+date	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type date = {year : int; month : int; day : int};;$/;"	t	language:OCaml
+day	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type date = {year : int; month : int; day : int};;$/;"	r	language:OCaml	type:date
+days	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^    | 2 -> let days = if is_leap_year d.year then 29 else 28 in$/;"	v	language:OCaml
+Family	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^  | Family of person * person * family list ;;$/;"	C	language:OCaml	type:family
+family	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type family =$/;"	t	language:OCaml
+Family_Trouble	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^exception Family_Trouble of string ;;$/;"	e	language:OCaml
+favorite	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type person = {name : string; favorite : color; birthdate : date};;$/;"	r	language:OCaml	type:person
+find_parents	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let find_parents = $/;"	v	language:OCaml
+graph	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type graph = (person * relationship * person) list ;;$/;"	t	language:OCaml
+Green	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type color_label = Red | Crimson | Orange | Yellow | Green | Blue | Indigo |$/;"	C	language:OCaml	type:color_label
+Indigo	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type color_label = Red | Crimson | Orange | Yellow | Green | Blue | Indigo |$/;"	C	language:OCaml	type:color_label
+Invalid_Color	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^exception Invalid_Color of string ;;$/;"	e	language:OCaml
+Invalid_Date	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^exception Invalid_Date of string ;;$/;"	e	language:OCaml
+Lab3	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^(*$/;"	M	language:OCaml
+make_color	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let make_color (r : int) (g : int) (b : int) : color =$/;"	v	language:OCaml
+marry	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let marry (f : family) (p : person) : family =$/;"	v	language:OCaml
+marry_graph	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let marry_graph = $/;"	v	language:OCaml
+month	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type date = {year : int; month : int; day : int};;$/;"	r	language:OCaml	type:date
+name	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type person = {name : string; favorite : color; birthdate : date};;$/;"	r	language:OCaml	type:person
+new_child	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let new_child (n : string) (c : color) (d : date) : family =$/;"	v	language:OCaml
+Orange	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type color_label = Red | Crimson | Orange | Yellow | Green | Blue | Indigo |$/;"	C	language:OCaml	type:color_label
+ParentOf	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type relationship = SpouseOf | ParentOf ;;$/;"	C	language:OCaml	type:relationship
+person	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type person = {name : string; favorite : color; birthdate : date};;$/;"	t	language:OCaml
+Red	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type color_label = Red | Crimson | Orange | Yellow | Green | Blue | Indigo |$/;"	C	language:OCaml	type:color_label
+relationship	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type relationship = SpouseOf | ParentOf ;;$/;"	t	language:OCaml
+RGB	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^| RGB of int * int * int$/;"	C	language:OCaml	type:color
+Simple	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^| Simple of color_label$/;"	C	language:OCaml	type:color
+Single	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^  | Single of person$/;"	C	language:OCaml	type:family
+SpouseOf	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type relationship = SpouseOf | ParentOf ;;$/;"	C	language:OCaml	type:relationship
+valid_date	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let valid_date (d : date) : date =$/;"	v	language:OCaml
+valid_rgb	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let valid_rgb (c : color)  =$/;"	v	language:OCaml
+Violet	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^Violet ;;$/;"	C	language:OCaml	type:color_label
+within_range	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^let within_range (n : int) (b : int) (e : int) : bool =$/;"	v	language:OCaml
+year	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type date = {year : int; month : int; day : int};;$/;"	r	language:OCaml	type:date
+Yellow	/Users/serinahu/Documents/CS51/labs/lab3/lab3.ml	/^type color_label = Red | Crimson | Orange | Yellow | Green | Blue | Indigo |$/;"	C	language:OCaml	type:color_label

@@ -358,7 +358,7 @@ is already made up of a married couple?
 
 exception Family_Trouble of string ;;
 
-let marry (p : person) (f : family) : family =
+let marry (f : family) (p : person) : family =
   match f with
   | Single p1 -> Family (p, p1, [])
   | Family (p1, p2, f) -> raise (Family_Trouble "Already married")
