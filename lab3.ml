@@ -56,7 +56,8 @@ be any of the following options: red, crimson, orange, yellow, green,
 blue, indigo, or violet.
 ......................................................................*)
 
-type color_label = NotImplemented ;;
+type color_label = Red | Crimson | Orange | Yellow | Green | Blue | Indigo |
+Violet ;;
 
 (* You've just defined a new variant type! But this is an overly
 simplistic representation of colors. Let's make it more usable.
@@ -91,7 +92,10 @@ channels. You'll want to use Simple and RGB as the value constructors
 in this new variant type.
 ......................................................................*)
 
-type color = NotImplemented ;;
+type color =
+| Simple of color_label
+| RGB of int * int * int
+;;
 
 (* Note that there is an important assumption about the RGB values
 that determine whether a color is valid or not. The RGB type contains
@@ -117,8 +121,14 @@ an Invalid_Color exception with a useful message.
 
 exception Invalid_Color of string ;;
 
-let valid_rgb = 
-  fun _ -> failwith "valid_rgb not implemented" ;;
+let valid_rgb (c : color)  =
+  let is_valid (n : int) : bool =
+    n >= 0 && n < 256
+  in
+  match c with
+  | RGB (r, g, b) -> if is_valid r && is_valid g && is_valid b then c
+  else raise (Invalid_Color (Printf.sprintf "(%d, %d, %d)" r g b))
+  | _ -> c
 
 (*......................................................................
 Exercise 3: Write a function, make_color, that accepts three integers
@@ -126,8 +136,8 @@ for the channel values and returns a value of the color type. Be sure
 to verify the invariant.
 ......................................................................*)
 
-let make_color = 
-  fun _ -> failwith "make_color not implemented" ;;
+let make_color (r : int) (g : int) (b : int) : color =
+  let c = RGB (r, g, b) in valid_rgb c
 
 (*......................................................................
 Exercise 4: Write a function, convert_to_rgb, that accepts a color and
@@ -144,8 +154,19 @@ below are some other values you might find helpful.
     240 | 130 | 240 | Violet
 ......................................................................*)
 
-let convert_to_rgb = 
-  fun _ -> failwith "convert_to_rgb not implemented" ;;
+let convert_to_rgb (c : color) : int * int * int =
+  match c with
+  | RGB (r, g, b) -> (r mod 256, g mod 256, b mod 256)
+  | Simple cl ->
+      match cl with
+      | Red -> 255, 0, 0
+      | Crimson -> 164, 16, 52
+      | Orange -> 255, 165, 0
+      | Yellow -> 255, 255, 0
+      | Green -> 0, 255, 0
+      | Blue -> 0, 0, 255
+      | Indigo -> 75, 0, 130
+      | Violet -> 240, 130, 240
 
 (* If we want to blend two colors, we might be tempted to average each
 of the individual color channels. This might be fine, but a quirk in
@@ -169,8 +190,9 @@ and returns an integer whose result matches the calculation above. Be
 sure to round your result when converting back to an integer.
 ......................................................................*)
 
-let blend_channel = 
-  fun _ -> failwith "blend_channel not implemented" ;;
+let blend_channel (a : int) (b : int) : int =
+  let a = float_of_int a and b = float_of_int b in
+  int_of_float (sqrt ((a *. a +. b *. b) /. 2.))
 
 (*......................................................................
 Exercise 6: Now write a function, blend, that returns the result of
@@ -178,8 +200,11 @@ blending two colors. Do you need to do anything special to preserve
 the invariant in this function after blending?
 ......................................................................*)
 
-let blend = 
-  fun _ -> failwith "blend not implemented" ;;
+let blend (c1 : color) (c2 : color) : color =
+  let r1, g1, b1 = convert_to_rgb c1 and r2, g2, b2 = convert_to_rgb c2 in
+  let c = RGB (blend_channel r1 r2, blend_channel g1 g2, blend_channel b1 b2)
+  in
+  valid_rgb c
 
    
 (*======================================================================
@@ -205,7 +230,7 @@ should be. Then, consider the implications of representing the overall
 data type as a tuple or a record.
 ......................................................................*)
 
-type date = NotImplemented ;;
+type date = {year : int; month : int; day : int};;
 
 (* After you've thought it through, look up the Date module in the
 OCaml documentation to see how this was implemented there. If you
@@ -247,8 +272,28 @@ the invariant is violated, and returns the date if valid.
 
 exception Invalid_Date of string ;;
 
-let valid_date = 
-  fun _ -> failwith "valid_date not implemented" ;;
+let within_range (n : int) (b : int) (e : int) : bool =
+  not (n < b || n > e)
+
+let valid_date (d : date) : date =
+  let is_leap_year (y : int) : bool =
+    if y mod 4 <> 0 then false
+    else if y mod 100 <> 0 then true
+    else if y mod 400 <> 0 then false
+    else true
+  in
+  if d.year <= 0 then raise (Invalid_Date (Printf.sprintf "bad year %d" d.year))
+  else if not (within_range d.month 1 12) then raise (Invalid_Date (Printf.sprintf
+  "bad month %d" d.month))
+  else
+    match d.month with
+    | 1 | 3 | 5 | 7 | 8 | 10 | 12 -> if within_range d.day 1 31 then d
+      else raise (Invalid_Date (Printf.sprintf "bad day %d/%d" d.month d.day))
+    | 4 | 6 | 9 | 11 -> if within_range d.day 1 30 then d
+      else raise (Invalid_Date (Printf.sprintf "bad day %d/%d" d.month d.day))
+    | 2 -> let days = if is_leap_year d.year then 29 else 28 in
+      if within_range d.day 1 days then d
+      else raise (Invalid_Date (Printf.sprintf "bad day %d/%d" d.month d.day))
 
 
 (*======================================================================
@@ -262,7 +307,7 @@ Exercise 10: Define a person record type. Use the field names "name",
 "favorite", and "birthdate".
 ......................................................................*)
 
-type person = NotImplemented ;;
+type person = {name : string; favorite : color; birthdate : date};;
 
 (* Let's now do something with these person values. We'll create a
 data structure that allows us to model simple familial relationships.
@@ -301,8 +346,8 @@ ensure the invariants are preserved for color and date, use them here
 as well.
 ......................................................................*)
 
-let new_child = 
-  fun _ -> failwith "new_child not implemented" ;;
+let new_child (n : string) (c : color) (d : date) : family =
+  Single {name = n; favorite = valid_rgb c; birthdate = valid_date d}
 
 (*......................................................................
 Exercise 12: Write a function that allows a person to marry in to a
@@ -313,8 +358,10 @@ is already made up of a married couple?
 
 exception Family_Trouble of string ;;
 
-let marry = 
-  fun _ -> failwith "marry not implemented" ;;
+let marry (p : person) (f : family) : family =
+  match f with
+  | Single p1 -> Family (p, p1, [])
+  | Family (p1, p2, f) -> raise (Family_Trouble "Already married")
 
 (*......................................................................
 Exercise 13: Write a function that accepts two families, and returns
@@ -325,16 +372,23 @@ assumptions provided in the type definition of family to determine how
 to behave in corner cases.
 ......................................................................*)
 
-let add_to_family = 
-  fun _ -> failwith "add_to_family not implemented" ;;
+let add_to_family (f1 : family) (f2 : family) : family =
+  match f1 with
+  | Family (p, p1, c) -> Family (p, p1, f2::c)
+  | _ -> raise (Family_Trouble "Single people can't have children?")
 
 (*......................................................................
 Exercise 14: Complete the function below that counts the number of
 people in a given family. Be sure you count all spouses and children.
 ......................................................................*)
 
-let count_people = 
-  fun _ -> failwith "count_people not implemented" ;;
+let count_people (f : family) : int =
+  let rec c_inner acc f =
+    match f with
+    | Single _ -> acc + 1
+    | Family (_, _, f1) -> List.fold_left ( + ) (acc + 2) (List.map (c_inner 0) f1)
+  in
+  c_inner 0 f
 
 (*......................................................................
 Exercise 15: Write a function find_parents of type
@@ -352,6 +406,10 @@ inequality. You may be accustomed to other operators, like, "==" and
 "!=", but these will give unexpected results. (The documentation for
 the Pervasives module can help explain why.)
 ......................................................................*)
+let contains_first (n : string) (f : family) : bool =
+  match f with
+  | Single p -> p.name = n
+  | Family (p1, p2, _) -> p1.name = n || p2.name = n
 
 let find_parents = 
   fun _ -> failwith "find_parents not implemented" ;;
