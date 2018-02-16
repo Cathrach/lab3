@@ -507,4 +507,4 @@ let find_parents_graph (f : graph) (n : string) : person list =
           else f_inner t acc
         | _ -> f_inner t acc
   in
-  f_inner f []
+  List.rev (f_inner f [])
