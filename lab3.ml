@@ -486,7 +486,7 @@ that includes the relationship whereby the third person is a child of
 the first two.
 ......................................................................*)
 
-let add_child_to_graph (f : graph) (p1 : person) (p2 : person) (c : person) =
+let add_child_to_graph (f : graph) (c : person) (p1 : person) (p2 : person) =
   (p1, ParentOf, c)::(p2, ParentOf, c)::(p1, SpouseOf, p2)::(p2, SpouseOf,
   p1)::f
 
