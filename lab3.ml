@@ -498,5 +498,14 @@ a string representing the name of the person whose parents you want
 to find, returning a person list for the parents.
 ......................................................................*)
 
-let find_parents_graph = 
-  fun _ -> failwith "find_parents_graph not implemented" ;;
+let find_parents_graph (f : graph) (n : string) : person list =
+  let rec f_inner f acc =
+    match f with
+    | [] -> acc
+    | h::t ->
+        match h with
+        | (p, ParentOf, c) -> if c.name = n then f_inner t (p::acc)
+          else f_inner t acc
+        | _ -> f_inner t acc
+  in
+  f_inner f []
