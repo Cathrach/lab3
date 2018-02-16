@@ -411,15 +411,18 @@ let contains_first (n : string) (f : family) : bool =
   | Single p -> p.name = n
   | Family (p1, p2, _) -> p1.name = n || p2.name = n
 
-let rec find_parents (n : string) (f : family) : (person * person) option =
+let rec find_parents_old (n : string) (f : family) : (person * person) option =
   match f with
   | Single p -> None
   | Family (p1, p2, f) -> if List.exists (contains_first n) f then Some (p1, p2)
   else
     try
-      List.find (fun x -> x <> None) (List.map (find_parents n) f)
+      List.find (fun x -> x <> None) (List.map (find_parents_old n) f)
     with
     _ -> None
+
+let find_parents (f : family) (n : string) : (person * person) option =
+  find_parents_old n f
 
 
 (*======================================================================
