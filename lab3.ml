@@ -411,8 +411,15 @@ let contains_first (n : string) (f : family) : bool =
   | Single p -> p.name = n
   | Family (p1, p2, _) -> p1.name = n || p2.name = n
 
-let find_parents = 
-  fun _ -> failwith "find_parents not implemented" ;;
+let rec find_parents (n : string) (f : family) : (person * person) option =
+  match f with
+  | Single p -> None
+  | Family (p1, p2, f) -> if List.exists (contains_first n) f then Some (p1, p2)
+  else
+    try
+      List.find (fun x -> x <> None) (List.map (find_parents n) f)
+    with
+    _ -> None
 
 
 (*======================================================================
@@ -455,8 +462,8 @@ edges.  The parameters you need to accept are, in order, the graph, a
 person and another person.
 ......................................................................*)
 
-let marry_graph = 
-  fun _ -> failwith "marry_graph not implemented" ;;
+let marry_graph (f : graph) (p1 : person) (p2: person) =
+  (p1, SpouseOf, p2)::(p2, SpouseOf, p1)::f
 
 (*There are far fewer restrictions compared to our rigidly-defined
 tree structure with variants. For instance, using the revised
@@ -476,8 +483,8 @@ that includes the relationship whereby the third person is a child of
 the first two.
 ......................................................................*)
 
-let add_child_to_graph = 
-  fun _ -> failwith "add_child_to_graph not implemented" ;;
+let add_child_to_graph (f : graph) (p1 : person) (p2 : person) (c : person) =
+  (p1, ParentOf, c)::(p2, ParentOf, c)::f
 
 (*......................................................................
 Exercise 18: Now, rewrite find_parents using this new graph form. Note
