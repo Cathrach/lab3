@@ -360,7 +360,7 @@ exception Family_Trouble of string ;;
 
 let marry (f : family) (p : person) : family =
   match f with
-  | Single p1 -> Family (p, p1, [])
+  | Single p1 -> Family (p1, p, [])
   | Family (p1, p2, f) -> raise (Family_Trouble "Already married")
 
 (*......................................................................
@@ -487,7 +487,8 @@ the first two.
 ......................................................................*)
 
 let add_child_to_graph (f : graph) (p1 : person) (p2 : person) (c : person) =
-  (p1, ParentOf, c)::(p2, ParentOf, c)::f
+  (p1, ParentOf, c)::(p2, ParentOf, c)::(p1, SpouseOf, p2)::(p2, SpouseOf,
+  p1)::f
 
 (*......................................................................
 Exercise 18: Now, rewrite find_parents using this new graph form. Note
