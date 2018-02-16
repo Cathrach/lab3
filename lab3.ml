@@ -487,8 +487,7 @@ the first two.
 ......................................................................*)
 
 let add_child_to_graph (f : graph) (c : person) (p1 : person) (p2 : person) =
-  (p1, ParentOf, c)::(p2, ParentOf, c)::(p1, SpouseOf, p2)::(p2, SpouseOf,
-  p1)::f
+  (p1, ParentOf, c)::(p2, ParentOf, c)::f
 
 (*......................................................................
 Exercise 18: Now, rewrite find_parents using this new graph form. Note
